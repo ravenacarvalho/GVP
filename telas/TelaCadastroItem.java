@@ -11,9 +11,12 @@ public class TelaCadastroItem extends JFrame {
         super("Cadastro de Item");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         JPanel painel = new JPanel();
+
+        // Usei GridLayout porque foi o jeito que consegui alinhar os campos
         painel.setLayout(new GridLayout(8, 2));
 
         painel.add(new JLabel("Tipo:"));
+        // Montei o combo aqui com os tipos de item que inventei
         JComboBox<String> comboTipo = new JComboBox<>(new String[]{"Camisa", "Calca", "Saia", "Casaco", "Calcinha", "Cueca", "Relogio", "Pulseira"});
         painel.add(comboTipo);
 
@@ -43,10 +46,11 @@ public class TelaCadastroItem extends JFrame {
 
         JButton botaoCadastrar = new JButton("Cadastrar");
         painel.add(botaoCadastrar);
-        painel.add(new JLabel(""));
+        painel.add(new JLabel("")); // Só pra completar o GridLayout
 
         getContentPane().add(painel);
 
+        // Quando clicar no botão, pega todos os dados e cadastra o item
         botaoCadastrar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String tipo = (String) comboTipo.getSelectedItem();
@@ -58,6 +62,7 @@ public class TelaCadastroItem extends JFrame {
                 String imagem = campoImagem.getText();
 
                 Item item = null;
+                // Achei mais fácil fazer assim, com vários if, do que mexer com switch
                 if (tipo.equals("Camisa")) {
                     item = new Camisa(nome, cor, tamanho, loja, conservacao, imagem);
                 }
@@ -82,8 +87,9 @@ public class TelaCadastroItem extends JFrame {
                 else if (tipo.equals("Pulseira")) {
                     item = new Pulseira(nome, cor, tamanho, loja, conservacao, imagem);
                 }
+                // Se conseguir criar, salva no gerenciador
                 if (item != null) {
-                    gerenciador.adicionarItem(item);
+                    gerenciador.adicionar(item);
                     JOptionPane.showMessageDialog(null, "Item cadastrado!");
                 }
             }

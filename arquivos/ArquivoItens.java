@@ -28,8 +28,8 @@ public class ArquivoItens {
                     item.getVezesUsado());
             }
             gravador.close();
-        } catch(IOException e) {
-            e.printStackTrace();
+        } catch(Exception e) {
+            System.out.println("Ops! Não deu pra salvar os itens");
         }
     }
 
@@ -39,8 +39,8 @@ public class ArquivoItens {
         try {
             FileReader fr = new FileReader(caminhoArquivo);
             BufferedReader leitor = new BufferedReader(fr);
-            String linha;
-            while((linha = leitor.readLine()) != null) {
+            String linha = leitor.readLine();
+            while (linha != null) {
                 String[] campos = linha.split(",");
                 String tipo = campos[0];
                 String nome = campos[1];
@@ -74,10 +74,11 @@ public class ArquivoItens {
                     for (int i = 0; i < vezesUsado; i++) item.registrarUso();
                     itens.add(item);
                 }
+                linha = leitor.readLine();
             }
             leitor.close();
-        } catch(IOException e) {
-            e.printStackTrace();
+        } catch(Exception e) {
+            System.out.println("Ops! Não foi possível ler os itens");
         }
         return itens;
     }

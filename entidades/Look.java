@@ -1,44 +1,46 @@
 package entidades;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.Serializable;
 
 public class Look implements Serializable {
-    private String nome;
-    private List<Item> itens;
-    private List<String> usos; // Exemplo: "10/03/2025 - Aniversário da Maria"
+    private String nomeLook;
+    private List<Item> listaItens;
+    private List<String> usosLook;
 
-    public Look(String nome) {
-        this.nome = nome;
-        this.itens = new ArrayList<>();
-        this.usos = new ArrayList<>();
+    public Look(String nomeLook) {
+        this.nomeLook = nomeLook;
+        this.listaItens = new ArrayList<>();
+        this.usosLook = new ArrayList<>();
     }
 
-    public String getNome() { 
-        return nome; 
+    public String getNome() {
+        return nomeLook;
     }
-    
-    public List<Item> getItens() { 
-        return itens; 
+
+    public List<Item> getItens() {
+        return listaItens;
     }
 
     public void adicionarItem(Item item) {
-        itens.add(item);
+        listaItens.add(item);
     }
 
     public void removerItem(Item item) {
-        itens.remove(item);
+        listaItens.remove(item);
     }
 
     public void registrarUso(String descricao) {
-        usos.add(descricao);
+        usosLook.add(descricao);
     }
 
-    public List<String> getUsos() { return usos; }
+    public List<String> getUsos() {
+        return usosLook;
+    }
 
     @Override
     public String toString() {
-        return nome;
+        return nomeLook;
     }
 }

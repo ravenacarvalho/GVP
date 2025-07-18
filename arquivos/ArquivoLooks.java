@@ -17,43 +17,31 @@ public class ArquivoLooks {
             FileWriter fw = new FileWriter(caminhoArquivo);
             PrintWriter gravador = new PrintWriter(fw);
             for (Look look : looks) {
-                StringBuilder linha = new StringBuilder();
-                linha.append(look.getNome());
-                for (Item item : look.getItens()) {
-                    linha.append(",").append(item.getNome());
-                }
-                gravador.println(linha.toString());
+                gravador.println(look.getNome());
             }
             gravador.close();
-        } catch(IOException e) {
-            e.printStackTrace();
+        } catch(Exception e) {
+            System.out.println("Ops! Não foi possível salvar os looks");
         }
     }
 
     // Lê os looks do arquivo
-    public List<Look> lerLooks(List<Item> itens) {
+    public List<Look> lerLooks() {
         List<Look> looks = new ArrayList<>();
         try {
             FileReader fr = new FileReader(caminhoArquivo);
             BufferedReader leitor = new BufferedReader(fr);
-            String linha;
-            while((linha = leitor.readLine()) != null) {
-                String[] campos = linha.split(",");
-                String nomeLook = campos[0];
-                Look look = new Look(nomeLook);
-                for (int i = 1; i < campos.length; i++) {
-                    for (Item item : itens) {
-                        if (item.getNome().equalsIgnoreCase(campos[i])) {
-                            look.adicionarItem(item);
-                            break;
-                        }
-                    }
+            String linha = leitor.readLine();
+            while (linha != null) {
+                Look look = new Look(linha);
+                if (look != null) {
+                    looks.add(look);
                 }
-                looks.add(look);
+                linha = leitor.readLine();
             }
             leitor.close();
-        } catch(IOException e) {
-            e.printStackTrace();
+        } catch(Exception e) {
+            System.out.println("Ops! Não foi possível ler os looks");
         }
         return looks;
     }

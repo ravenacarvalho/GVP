@@ -6,13 +6,13 @@ import java.time.LocalDate;
 public class Calcinha extends Item implements ILavavel {
     private LocalDate ultimaLavagem = null;
 
-    public Calcinha(String nome, String cor, String tamanho, String lojaOrigem, String estadoConservacao, String caminhoImagem) {
-        super(nome, cor, tamanho, lojaOrigem, estadoConservacao, caminhoImagem);
+    public Calcinha(String nomeCalcinha, String corCalcinha, String tam, String loja, String conservacao, String img) {
+        super(nomeCalcinha, corCalcinha, tam, loja, conservacao, img);
     }
 
     @Override
     public void registrarLavagem(LocalDate data) {
-        this.ultimaLavagem = data;
+        ultimaLavagem = data;
     }
 
     @Override

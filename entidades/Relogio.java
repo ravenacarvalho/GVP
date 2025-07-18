@@ -25,16 +25,36 @@ public class Relogio extends Item implements IEmprestavel {
     @Override
     public int quantidadeDiasEmprestado() {
         if (!emprestado || dataEmprestimo == null) return 0;
-        LocalDate hoje = LocalDate.now();
+    
+        int anoEmp = dataEmprestimo.getYear();
+        int mesEmp = dataEmprestimo.getMonthValue();
+        int diaEmp = dataEmprestimo.getDayOfMonth();
+    
+        int anoAtual = java.time.LocalDate.now().getYear();
+        int mesAtual = java.time.LocalDate.now().getMonthValue();
+        int diaAtual = java.time.LocalDate.now().getDayOfMonth();
+    
         int dias = 0;
-        LocalDate aux = dataEmprestimo;
-        while (aux.isBefore(hoje)) {
-            aux = aux.plusDays(1);
-            dias++;
+    
+        // Não tratei ano bissexto, ficou só no básico mesmo
+        for (int a = anoEmp; a < anoAtual; a++) {
+            dias += 365;
         }
+    
+        for (int m = mesEmp; m < mesAtual; m++) {
+            if (m == 2) dias += 28;
+            else if (m == 4 || m == 6 || m == 9 || m == 11) dias += 30;
+            else dias += 31;
+        }
+    
+        dias += diaAtual - diaEmp;
+    
+        // Só para testar no console, pode apagar depois
+        System.out.println("Dias emprestado: " + dias);
+    
         return dias;
     }
-
+    
     @Override
     public void registrarDevolucao() {
         this.emprestado = false;

@@ -6,48 +6,62 @@ import java.time.LocalDate;
 
 public class Casaco extends Item implements IEmprestavel, ILavavel {
     private boolean emprestado = false;
-    private String nomePessoaEmprestimo = "";
+    private String pessoaEmprestimo = "";
     private LocalDate dataEmprestimo = null;
     private LocalDate ultimaLavagem = null;
 
-    public Casaco(String nome, String cor, String tamanho, String lojaOrigem, String estadoConservacao, String caminhoImagem) {
-        super(nome, cor, tamanho, lojaOrigem, estadoConservacao, caminhoImagem);
+    public Casaco(String nomeCasaco, String corCasaco, String tam, String loja, String conservacao, String img) {
+        super(nomeCasaco, corCasaco, tam, loja, conservacao, img);
     }
 
-    // IEmprestavel
     @Override
-    public void registrarEmprestimo(String nome, LocalDate data) {
+    public void registrarEmprestimo(String pessoa, LocalDate data) {
         if (!emprestado) {
-            this.emprestado = true;
-            this.nomePessoaEmprestimo = nome;
-            this.dataEmprestimo = data;
+            emprestado = true;
+            pessoaEmprestimo = pessoa;
+            dataEmprestimo = data;
         }
     }
 
     @Override
     public int quantidadeDiasEmprestado() {
-        if (!emprestado || dataEmprestimo == null) return 0;
-        LocalDate hoje = LocalDate.now();
-        int dias = 0;
-        LocalDate aux = dataEmprestimo;
-        while (aux.isBefore(hoje)) {
-            aux = aux.plusDays(1);
-            dias++;
+        if (!emprestado || dataEmprestimo == null) {
+            return 0;
         }
-        return dias;
+        LocalDate hoje = LocalDate.now();
+
+        int anoEmp = dataEmprestimo.getYear();
+        int mesEmp = dataEmprestimo.getMonthValue();
+        int diaEmp = dataEmprestimo.getDayOfMonth();
+
+        int anoHoje = hoje.getYear();
+        int mesHoje = hoje.getMonthValue();
+        int diaHoje = hoje.getDayOfMonth();
+
+        int totalDias = 0;
+
+        // Cálculo bem manual (não considera bissexto)
+        totalDias += (anoHoje - anoEmp) * 365;
+        totalDias += (mesHoje - mesEmp) * 30; // Média escolhida pra facilitar o cálculo
+        totalDias += (diaHoje - diaEmp);
+
+        if (totalDias < 0) {
+            totalDias = 0;
+        }
+
+        return totalDias;
     }
 
     @Override
     public void registrarDevolucao() {
-        this.emprestado = false;
-        this.nomePessoaEmprestimo = "";
-        this.dataEmprestimo = null;
+        emprestado = false;
+        pessoaEmprestimo = "";
+        dataEmprestimo = null;
     }
 
-    // ILavavel
     @Override
     public void registrarLavagem(LocalDate data) {
-        this.ultimaLavagem = data;
+        ultimaLavagem = data;
     }
 
     @Override

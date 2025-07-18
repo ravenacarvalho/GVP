@@ -15,7 +15,7 @@ public class TelaListarItens extends JFrame {
         JTextArea areaTexto = new JTextArea(10, 40);
         areaTexto.setEditable(false);
         StringBuilder texto = new StringBuilder();
-        for (Item item : gerenciador.getItens()) {
+        for (Item item : gerenciador.pegarItens()) {
             texto.append(item.getClass().getSimpleName())
                  .append(" - ").append(item.getNome())
                  .append(", Cor: ").append(item.getCor())
