@@ -5,81 +5,119 @@ import java.util.*;
 import java.io.*;
 
 public class ArquivoItens {
-    private String caminhoArquivo;
+    private String caminho;
 
-    public ArquivoItens(String caminhoArquivo) {
-        this.caminhoArquivo = caminhoArquivo;
+    public ArquivoItens(String arquivo) {
+        this.caminho = arquivo;
     }
 
-    // Salva todos os itens
-    public void salvarItens(List<Item> itens) {
+    // Método para salvar itens no arquivo
+    public void salvarItens(ArrayList<Item> listaItens) {
         try {
-            FileWriter fw = new FileWriter(caminhoArquivo);
+            FileWriter fw = new FileWriter(caminho);
             PrintWriter gravador = new PrintWriter(fw);
-            for (Item item : itens) {
-                String tipo = item.getClass().getSimpleName();
-                gravador.println(tipo + "," +
-                    item.getNome() + "," +
-                    item.getCor() + "," +
-                    item.getTamanho() + "," +
-                    item.getLojaOrigem() + "," +
-                    item.getEstadoConservacao() + "," +
-                    item.getCaminhoImagem() + "," +
-                    item.getVezesUsado());
+
+            for (int pos = 0; pos < listaItens.size(); pos++) {
+                Item it = listaItens.get(pos);
+                String tipo = "";
+                if (it instanceof Camisa) {
+                    tipo = "Camisa";
+                } 
+                else if (it instanceof Calca) {
+                    tipo = "Calca";
+                }
+                else if (it instanceof Saia) {
+                    tipo = "Saia";
+                }
+                else if (it instanceof Casaco) {
+                    tipo = "Casaco";
+                }
+                else if (it instanceof Calcinha) {
+                    tipo = "Calcinha";
+                }
+                else if (it instanceof Cueca) {
+                    tipo = "Cueca";
+                }
+                else if (it instanceof Relogio) {
+                    tipo = "Relogio";
+                }
+                else if (it instanceof Pulseira) {
+                    tipo = "Pulseira";
+                }
+
+                gravador.println(tipo + ";" +
+                    it.getNome() + ";" +
+                    it.getCor() + ";" +
+                    it.getTamanho() + ";" +
+                    it.getLojaOrigem() + ";" +
+                    it.getEstadoConservacao() + ";" +
+                    it.getCaminhoImagem() + ";" +
+                    it.getVezesUsado()
+                );
             }
             gravador.close();
-        } catch(Exception e) {
-            System.out.println("Ops! Não deu pra salvar os itens");
+
+        } catch (Exception erro) {
+            System.out.println("Deu erro ao salvar os itens... Tenta de novo aí.");
         }
     }
 
-    // Lê os itens do arquivo
-    public List<Item> lerItens() {
-        List<Item> itens = new ArrayList<>();
+    // Método para ler itens do arquivo
+    public ArrayList<Item> lerItens() {
+        ArrayList<Item> itensLidos = new ArrayList<Item>();
         try {
-            FileReader fr = new FileReader(caminhoArquivo);
-            BufferedReader leitor = new BufferedReader(fr);
-            String linha = leitor.readLine();
-            while (linha != null) {
-                String[] campos = linha.split(",");
-                String tipo = campos[0];
-                String nome = campos[1];
-                String cor = campos[2];
-                String tamanho = campos[3];
-                String loja = campos[4];
-                String conservacao = campos[5];
-                String caminhoImagem = campos[6];
-                int vezesUsado = Integer.parseInt(campos[7]);
+            BufferedReader leitura = new BufferedReader(new FileReader(caminho));
+            String linhaAtual = leitura.readLine();
+            while (linhaAtual != null) {
+                String[] partesLinha = linhaAtual.split(";");
+                String tipo = partesLinha[0];
+                String nomeItem = partesLinha[1];
+                String corItem = partesLinha[2];
+                String tamItem = partesLinha[3];
+                String lojaItem = partesLinha[4];
+                String conserv = partesLinha[5];
+                String img = partesLinha[6];
+                int qtdUsos = Integer.parseInt(partesLinha[7]);
 
                 Item item = null;
-                switch(tipo) {
-                    case "Camisa":
-                        item = new Camisa(nome, cor, tamanho, loja, conservacao, caminhoImagem); break;
-                    case "Calca":
-                        item = new Calca(nome, cor, tamanho, loja, conservacao, caminhoImagem); break;
-                    case "Saia":
-                        item = new Saia(nome, cor, tamanho, loja, conservacao, caminhoImagem); break;
-                    case "Casaco":
-                        item = new Casaco(nome, cor, tamanho, loja, conservacao, caminhoImagem); break;
-                    case "Calcinha":
-                        item = new Calcinha(nome, cor, tamanho, loja, conservacao, caminhoImagem); break;
-                    case "Cueca":
-                        item = new Cueca(nome, cor, tamanho, loja, conservacao, caminhoImagem); break;
-                    case "Relogio":
-                        item = new Relogio(nome, cor, tamanho, loja, conservacao, caminhoImagem); break;
-                    case "Pulseira":
-                        item = new Pulseira(nome, cor, tamanho, loja, conservacao, caminhoImagem); break;
+                if (tipo.equals("Camisa")) {
+                    item = new Camisa(nomeItem, corItem, tamItem, lojaItem, conserv, img);
                 }
+                else if (tipo.equals("Calca")) {
+                    item = new Calca(nomeItem, corItem, tamItem, lojaItem, conserv, img);
+                }
+                else if (tipo.equals("Saia")) {
+                    item = new Saia(nomeItem, corItem, tamItem, lojaItem, conserv, img);
+                }
+                else if (tipo.equals("Casaco")) {
+                    item = new Casaco(nomeItem, corItem, tamItem, lojaItem, conserv, img);
+                }
+                else if (tipo.equals("Calcinha")) {
+                    item = new Calcinha(nomeItem, corItem, tamItem, lojaItem, conserv, img);
+                }
+                else if (tipo.equals("Cueca")) {
+                    item = new Cueca(nomeItem, corItem, tamItem, lojaItem, conserv, img);
+                }
+                else if (tipo.equals("Relogio")) {
+                    item = new Relogio(nomeItem, corItem, tamItem, lojaItem, conserv, img);
+                }
+                else if (tipo.equals("Pulseira")) {
+                    item = new Pulseira(nomeItem, corItem, tamItem, lojaItem, conserv, img);
+                }
+
                 if (item != null) {
-                    for (int i = 0; i < vezesUsado; i++) item.registrarUso();
-                    itens.add(item);
+                    for (int k = 0; k < qtdUsos; k++) {
+                        item.registrarUso();
+                    }
+                    itensLidos.add(item);
                 }
-                linha = leitor.readLine();
+                linhaAtual = leitura.readLine();
             }
-            leitor.close();
-        } catch(Exception e) {
-            System.out.println("Ops! Não foi possível ler os itens");
+            leitura.close();
+
+        } catch (Exception erro) {
+            System.out.println("Não consegui ler os itens... vê se o arquivo existe ou se está certinho.");
         }
-        return itens;
+        return itensLidos;
     }
 }

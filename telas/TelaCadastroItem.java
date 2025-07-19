@@ -1,13 +1,13 @@
 package telas;
 
 import entidades.*;
-import sistema.GerenciadorItens;
+import organizador.Organizador;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
 public class TelaCadastroItem extends JFrame {
-    public TelaCadastroItem(GerenciadorItens gerenciador) {
+    public TelaCadastroItem(Organizador organizador) {
         super("Cadastro de Item");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         JPanel painel = new JPanel();
@@ -16,7 +16,7 @@ public class TelaCadastroItem extends JFrame {
         painel.setLayout(new GridLayout(8, 2));
 
         painel.add(new JLabel("Tipo:"));
-        // Montei o combo aqui com os tipos de item que inventei
+        // Montei o combo aqui com os tipos de item que criei
         JComboBox<String> comboTipo = new JComboBox<>(new String[]{"Camisa", "Calca", "Saia", "Casaco", "Calcinha", "Cueca", "Relogio", "Pulseira"});
         painel.add(comboTipo);
 
@@ -87,9 +87,9 @@ public class TelaCadastroItem extends JFrame {
                 else if (tipo.equals("Pulseira")) {
                     item = new Pulseira(nome, cor, tamanho, loja, conservacao, imagem);
                 }
-                // Se conseguir criar, salva no gerenciador
+                // Se conseguir criar, salva no organizador
                 if (item != null) {
-                    gerenciador.adicionar(item);
+                    organizador.adicionar(item);
                     JOptionPane.showMessageDialog(null, "Item cadastrado!");
                 }
             }

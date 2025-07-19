@@ -11,9 +11,13 @@ public class Casaco extends Item implements IEmprestavel, ILavavel {
     private LocalDate ultimaLavagem = null;
 
     public Casaco(String nomeCasaco, String corCasaco, String tam, String loja, String conservacao, String img) {
-        super(nomeCasaco, corCasaco, tam, loja, conservacao, img);
+        super(nomeCasaco, corCasaco, tam, loja, conservacao, img, "Casaco");
     }
 
+    @Override
+    public boolean isEmprestado() {
+        return emprestado;
+    }
     @Override
     public void registrarEmprestimo(String pessoa, LocalDate data) {
         if (!emprestado) {
@@ -22,7 +26,6 @@ public class Casaco extends Item implements IEmprestavel, ILavavel {
             dataEmprestimo = data;
         }
     }
-
     @Override
     public int quantidadeDiasEmprestado() {
         if (!emprestado || dataEmprestimo == null) {
@@ -51,19 +54,16 @@ public class Casaco extends Item implements IEmprestavel, ILavavel {
 
         return totalDias;
     }
-
     @Override
     public void registrarDevolucao() {
         emprestado = false;
         pessoaEmprestimo = "";
         dataEmprestimo = null;
     }
-
     @Override
     public void registrarLavagem(LocalDate data) {
         ultimaLavagem = data;
     }
-
     @Override
     public LocalDate getUltimaLavagem() {
         return ultimaLavagem;

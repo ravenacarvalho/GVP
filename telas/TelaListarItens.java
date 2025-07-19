@@ -1,12 +1,12 @@
 package telas;
 
 import entidades.Item;
-import sistema.GerenciadorItens;
+import organizador.Organizador;
 import javax.swing.*;
 import java.awt.*;
 
 public class TelaListarItens extends JFrame {
-    public TelaListarItens(GerenciadorItens gerenciador) {
+    public TelaListarItens(Organizador organizador) {
         super("Listar Itens");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         JPanel painel = new JPanel();
@@ -15,8 +15,8 @@ public class TelaListarItens extends JFrame {
         JTextArea areaTexto = new JTextArea(10, 40);
         areaTexto.setEditable(false);
         StringBuilder texto = new StringBuilder();
-        for (Item item : gerenciador.pegarItens()) {
-            texto.append(item.getClass().getSimpleName())
+        for (Item item : organizador.pegarItens()) {
+            texto.append(item.getTipo())
                  .append(" - ").append(item.getNome())
                  .append(", Cor: ").append(item.getCor())
                  .append(", Tamanho: ").append(item.getTamanho())

@@ -1,11 +1,11 @@
 package telas;
 
-import sistema.GerenciadorItens;
+import organizador.Organizador;
 import javax.swing.*;
 import java.awt.*;
 
 public class TelaPrincipal extends JFrame {
-    public TelaPrincipal(GerenciadorItens gerenciador) {
+    public TelaPrincipal(Organizador organizador) {
         super("Gestor de Vestuário Pessoal");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel painel = new JPanel();
@@ -26,9 +26,9 @@ public class TelaPrincipal extends JFrame {
         getContentPane().add(painel);
 
         // Quando clica no botão, abre a tela correspondente
-        botaoCad.addActionListener(e -> new TelaCadastroItem(gerenciador));
-        botaoListar.addActionListener(e -> new TelaListarItens(gerenciador));
-        botaoDel.addActionListener(e -> new TelaRemoverItem(gerenciador));
+        botaoCad.addActionListener(e -> new TelaCadastroItem(organizador));
+        botaoListar.addActionListener(e -> new TelaListarItens(organizador));
+        botaoDel.addActionListener(e -> new TelaRemoverItem(organizador));
         botaoFechar.addActionListener(e -> System.exit(0));
 
         setSize(300, 250);

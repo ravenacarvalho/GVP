@@ -6,4 +6,5 @@ public interface IEmprestavel {
     void registrarEmprestimo(String nomePessoa, LocalDate data);
     int quantidadeDiasEmprestado();
     void registrarDevolucao();
+    boolean isEmprestado(); 
 }

@@ -1,12 +1,12 @@
 package telas;
 
-import sistema.GerenciadorItens;
+import organizador.Organizador;
 import entidades.Item;
 import javax.swing.*;
 import java.awt.*;
 
 public class TelaRemoverItem extends JFrame {
-    public TelaRemoverItem(GerenciadorItens gerenciador) {
+    public TelaRemoverItem(Organizador organizador) {
         super("Remover Item");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -24,10 +24,10 @@ public class TelaRemoverItem extends JFrame {
         // Quando clicar, tenta remover da lista
         botaoRemover.addActionListener(e -> {
             String nome = campoNome.getText();
-            Item item = gerenciador.procurarItem(nome);
+            Item item = organizador.procurarItem(nome);
 
             if (item != null) {
-                gerenciador.remover(item);
+                organizador.remover(item);
                 // Dá um aviso quando conseguiu
                 JOptionPane.showMessageDialog(null, "Item removido com sucesso!");
             } else {

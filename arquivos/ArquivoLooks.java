@@ -5,44 +5,67 @@ import java.util.*;
 import java.io.*;
 
 public class ArquivoLooks {
-    private String caminhoArquivo;
+    private String caminho;
 
-    public ArquivoLooks(String caminhoArquivo) {
-        this.caminhoArquivo = caminhoArquivo;
+    public ArquivoLooks(String arquivo) {
+        this.caminho = arquivo;
     }
 
-    // Salva todos os looks
-    public void salvarLooks(List<Look> looks) {
+    // Salva todos os looks com seus itens 
+    public void salvarLooks(ArrayList<Look> listaLooks) {
         try {
-            FileWriter fw = new FileWriter(caminhoArquivo);
+            FileWriter fw = new FileWriter(caminho);
             PrintWriter gravador = new PrintWriter(fw);
-            for (Look look : looks) {
-                gravador.println(look.getNome());
+
+            for (int i = 0; i < listaLooks.size(); i++) {
+                Look lk = listaLooks.get(i);
+                StringBuilder linha = new StringBuilder();
+                linha.append(lk.getNome());
+                for (Item it : lk.getItens()) {
+                    linha.append(";").append(it.getNome());
+                }
+                gravador.println(linha.toString());
             }
             gravador.close();
-        } catch(Exception e) {
-            System.out.println("Ops! Não foi possível salvar os looks");
+        } catch (Exception erro) {
+            System.out.println("Deu erro ao salvar os looks.");
         }
     }
 
-    // Lê os looks do arquivo
-    public List<Look> lerLooks() {
-        List<Look> looks = new ArrayList<>();
+    // Para ler looks do arquivo, precisa passar os itens já carregados
+    public List<Look> lerLooks(List<Item> listaDeItens) {
+        ArrayList<Look> looksLidos = new ArrayList<Look>();
         try {
-            FileReader fr = new FileReader(caminhoArquivo);
-            BufferedReader leitor = new BufferedReader(fr);
-            String linha = leitor.readLine();
-            while (linha != null) {
-                Look look = new Look(linha);
-                if (look != null) {
-                    looks.add(look);
+            BufferedReader leitura = new BufferedReader(new FileReader(caminho));
+            String linhaAtual = leitura.readLine();
+            while (linhaAtual != null) {
+                String[] partes = linhaAtual.split(";");
+                Look novoLook = new Look(partes[0]);
+                for (int i = 1; i < partes.length; i++) {
+                    String nomeItem = partes[i];
+                    Item achado = buscarItemPorNome(nomeItem, listaDeItens);
+                    if (achado != null) {
+                        novoLook.montar(achado);
+                    }
                 }
-                linha = leitor.readLine();
+                looksLidos.add(novoLook);
+                linhaAtual = leitura.readLine();
             }
-            leitor.close();
-        } catch(Exception e) {
-            System.out.println("Ops! Não foi possível ler os looks");
+            leitura.close();
+        } catch (Exception exc) {
+            System.out.println("Não consegui ler os looks.");
         }
-        return looks;
+        return looksLidos;
+    }
+
+    // Função para buscar item pelo nome numa lista
+    private Item buscarItemPorNome(String nome, List<Item> lista) {
+        for (int i = 0; i < lista.size(); i++) {
+            Item it = lista.get(i);
+            if (it.getNome().equals(nome)) {
+                return it;
+            }
+        }
+        return null;
     }
 }
