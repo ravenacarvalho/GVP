@@ -12,7 +12,6 @@ public class TelaCadastroItem extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         JPanel painel = new JPanel();
 
-        // Usei GridLayout porque foi o jeito que consegui alinhar os campos
         painel.setLayout(new GridLayout(8, 2));
 
         painel.add(new JLabel("Tipo:"));
@@ -62,7 +61,6 @@ public class TelaCadastroItem extends JFrame {
                 String imagem = campoImagem.getText();
 
                 Item item = null;
-                // Achei mais fácil fazer assim, com vários if, do que mexer com switch
                 if (tipo.equals("Camisa")) {
                     item = new Camisa(nome, cor, tamanho, loja, conservacao, imagem);
                 }
