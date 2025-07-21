@@ -183,7 +183,7 @@ public class Look implements Serializable {
     public String getNome() {
         return nomeLook;
     }
-    public List<Item> getItens() {
+    public List<Item> pegarItens() {
         return itensDoLook;
     }
 }

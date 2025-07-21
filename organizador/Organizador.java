@@ -40,6 +40,8 @@ public class Organizador {
     public ArrayList<Item> pegarItens() {
         return lstItens;
     }
+
+    //Estatísticas
     public void mostrarItemMaisUsado() {
         if (lstItens == null || lstItens.isEmpty()) {
             System.out.println("Sem item cadastrado");

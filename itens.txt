@@ -1,0 +1,6 @@
+Camisa;Camisa da Zara;Preta;P;Zara;Excelente;Teste;0
+Saia;Saia Plissada;Rosa;P;MModas;Boa;Teste;0
+Calcinha;Calcinha básica;Bege;P;Renner;Excelente;Teste;0
+Relogio;Relógio Technos;Preto;P;Technos;Excelente;Teste;0
+Casaco;Blazer;Azul Marinho;P;C&A;Excelente;Teste;0
+Calca;Calça Jeans Mom;Azul;P;Tommy Hilfiger;Excelente;Teste;0

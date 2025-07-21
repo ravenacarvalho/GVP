@@ -16,12 +16,13 @@ public class ArquivoLooks {
         try {
             FileWriter fw = new FileWriter(caminho);
             PrintWriter gravador = new PrintWriter(fw);
-
-            for (int i = 0; i < listaLooks.size(); i++) {
-                Look lk = listaLooks.get(i);
+    
+            for (int k = 0; k < listaLooks.size(); k++) { // Loop para cada look
+                Look lk = listaLooks.get(k);
                 StringBuilder linha = new StringBuilder();
                 linha.append(lk.getNome());
-                for (Item it : lk.getItens()) {
+                for (int i = 0; i < lk.pegarItens().size(); i++) { // Loop para cada item do look
+                    Item it = lk.pegarItens().get(i);
                     linha.append(";").append(it.getNome());
                 }
                 gravador.println(linha.toString());
@@ -30,7 +31,7 @@ public class ArquivoLooks {
         } catch (Exception erro) {
             System.out.println("Deu erro ao salvar os looks.");
         }
-    }
+    }    
 
     // Para ler looks do arquivo, precisa passar os itens já carregados
     public List<Look> lerLooks(List<Item> listaDeItens) {

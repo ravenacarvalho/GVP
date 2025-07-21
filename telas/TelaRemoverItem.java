@@ -2,43 +2,46 @@ package telas;
 
 import organizador.Organizador;
 import entidades.Item;
+import arquivos.ArquivoItens;
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class TelaRemoverItem extends JFrame {
-    public TelaRemoverItem(Organizador organizador) {
+    // Tela de remoção de itens do sistema
+    public TelaRemoverItem(Organizador organizador, ArquivoItens arqItens) {
         super("Remover Item");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         JPanel painel = new JPanel();
         painel.setLayout(new FlowLayout());
 
-        // Pergunta o nome do item pra remover
+        // Campo para informar o nome do item a ser removido
         painel.add(new JLabel("Nome do item que vai remover:"));
         JTextField campoNome = new JTextField(15);
         painel.add(campoNome);
 
+        // Botão para tentar remover o item informado
         JButton botaoRemover = new JButton("Tentar Remover");
         painel.add(botaoRemover);
 
-        // Quando clicar, tenta remover da lista
+        // Ação: remove o item e salva a lista atualizada
         botaoRemover.addActionListener(e -> {
             String nome = campoNome.getText();
             Item item = organizador.procurarItem(nome);
 
             if (item != null) {
-                organizador.remover(item);
-                // Dá um aviso quando conseguiu
+                organizador.remover(item); // Remove da lista em memória
+                arqItens.salvarItens(new ArrayList<>(organizador.pegarItens())); // Salva no arquivo (persistência)
                 JOptionPane.showMessageDialog(null, "Item removido com sucesso!");
+                dispose(); // Fecha a tela após remover
             } else {
-                // Não achou o item, mostra aviso
                 JOptionPane.showMessageDialog(null, "Item não encontrado!");
             }
         });
 
         getContentPane().add(painel);
         setSize(350, 120);
-        // Centraliza a janela na tela
         setLocationRelativeTo(null);
         setVisible(true);
     }

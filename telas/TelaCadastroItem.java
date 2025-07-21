@@ -5,9 +5,10 @@ import organizador.Organizador;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 public class TelaCadastroItem extends JFrame {
-    public TelaCadastroItem(Organizador organizador) {
+    public TelaCadastroItem(Organizador organizador, arquivos.ArquivoItens arqItens) {
         super("Cadastro de Item");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         JPanel painel = new JPanel();
@@ -88,7 +89,9 @@ public class TelaCadastroItem extends JFrame {
                 // Se conseguir criar, salva no organizador
                 if (item != null) {
                     organizador.adicionar(item);
+                    arqItens.salvarItens(new ArrayList<>(organizador.pegarItens()));
                     JOptionPane.showMessageDialog(null, "Item cadastrado!");
+                    dispose();
                 }
             }
         });
