@@ -36,7 +36,7 @@ public class TelaPrincipal extends JFrame {
         botaoCad.addActionListener(e -> new TelaCadastroItem(organizador, arqItens));
         botaoListar.addActionListener(e -> new TelaListarItens(organizador));
         botaoDel.addActionListener(e -> new TelaRemoverItem(organizador, arqItens));
-        botaoMontarLook.addActionListener(e -> new TelaMontarLook(organizador, arqLooks));
+        botaoMontarLook.addActionListener(e -> new TelaMontarLook(organizador, arqLooks, arqItens));
         botaoListarLooks.addActionListener(e -> new TelaListarLooks(organizador, arqLooks));
 
         botaoFechar.addActionListener(e -> System.exit(0));

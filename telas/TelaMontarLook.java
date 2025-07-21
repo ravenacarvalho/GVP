@@ -6,10 +6,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import arquivos.ArquivoLooks;
+import arquivos.ArquivoItens;
 import java.util.ArrayList;
 
 public class TelaMontarLook extends JFrame {
-    public TelaMontarLook(Organizador organizador, ArquivoLooks arqLooks) {
+    public TelaMontarLook(Organizador organizador, ArquivoLooks arqLooks, arquivos.ArquivoItens arqItens) {
         super("Montar Look");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -59,7 +60,8 @@ public class TelaMontarLook extends JFrame {
                     item.registrarUso();
                 }
                 organizador.adicionarLook(look);
-                arqLooks.salvarLooks(new ArrayList<>(organizador.pegarLooks())); //Salva um look sempre que é adicionado
+                arqLooks.salvarLooks(new ArrayList<>(organizador.pegarLooks())); // Salva os looks
+                arqItens.salvarItens(new ArrayList<>(organizador.pegarItens())); // Salva os itens com os usos atualizados
                 JOptionPane.showMessageDialog(null, "Look criado!");
                 dispose();
             }
