@@ -52,7 +52,7 @@ public class ArquivoLooks {
             while (linhaAtual != null) {
                 String[] partes = linhaAtual.split(";");
                 Look novoLook = new Look(partes[0]);
-                // Itens vão até a penúltima posição
+                //Adiciona os itens (menos o primeiro, que é nome, e o último, que são usos)
                 for (int i = 1; i < partes.length - 1; i++) {
                     String nomeItem = partes[i];
                     Item achado = buscarItemPorNome(nomeItem, listaDeItens);
@@ -60,16 +60,13 @@ public class ArquivoLooks {
                         novoLook.montar(achado);
                     }
                 }
-                //Agora, processa os usos (último campo)
-                if (partes.length > 1) {
-                    String usosStr = partes[partes.length - 1];
-                    if (!usosStr.isEmpty()) {
-                        String[] usos = usosStr.split("\\|");
-                        for (int j = 0; j < usos.length; j++) {
-                            novoLook.registrarUso(usos[j]);
-                        }
-                    }
-                }                
+                //Só adiciona uso se não vazio e tiver " - " (ex: "10-07-2025 - Festa")
+                String usosStr = partes[partes.length - 1];
+                if (!usosStr.isEmpty() && usosStr.contains(" - ")) {
+                    String[] usos = usosStr.split("\\|");
+                    for (int j = 0; j < usos.length; j++) {
+                        novoLook.registrarUso(usos[j]);
+                    }     
                 looksLidos.add(novoLook);
                 linhaAtual = leitura.readLine();
             }
