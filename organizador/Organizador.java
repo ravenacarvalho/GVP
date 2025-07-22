@@ -24,7 +24,7 @@ public class Organizador {
         //Procura item pelo nome na lista
         for (int i = 0; i < lstItens.size(); i++) {
             Item item = lstItens.get(i);
-            if (item.getNome().equals(nome)) {
+            if (item.getNome().equalsIgnoreCase(nome)) {
                 return item;
             }
         }
