@@ -12,7 +12,7 @@ public class ArquivoItens {
         this.caminho = arquivo;
     }
 
-    // Método para salvar itens no arquivo
+    //Salva todos os itens no arquivo (um por linha, separados por ;)
     public void salvarItens(ArrayList<Item> listaItens) {
         try {
             FileWriter fw = new FileWriter(caminho);
@@ -22,7 +22,7 @@ public class ArquivoItens {
                 Item it = listaItens.get(pos);
                 String tipo = it.getTipo();
 
-                // Campos básicos
+                //Monta a linha com os dados do item
                 String linha = tipo + ";" +
                     it.getNome() + ";" +
                     it.getCor() + ";" +
@@ -32,15 +32,15 @@ public class ArquivoItens {
                     it.getCaminhoImagem() + ";" +
                     it.getVezesUsado();
 
-                // Se o item é emprestável, salva informações do empréstimo
+                //Se o item é emprestável, adiciona os campos de empréstimo
                 if (it instanceof IEmprestavel) {
                     IEmprestavel emp = (IEmprestavel) it;
-                    linha += ";" + emp.isEmprestado(); // true/false
+                    linha += ";" + emp.isEmprestado(); //true/false
                     String nomePessoa = emp.getNomePessoaEmprestimo();
                     linha += ";" + (nomePessoa == null ? "" : nomePessoa);
                     String data = "";
                     if (emp.getDataEmprestimo() != null) {
-                        data = emp.getDataEmprestimo().toString(); // yyyy-MM-dd
+                        data = emp.getDataEmprestimo().toString(); //yyyy-MM-dd
                     }
                     linha += ";" + data;
                 } else {
@@ -57,13 +57,14 @@ public class ArquivoItens {
         }
     }
 
-    // Método para ler itens do arquivo
+    //Lê todos os itens do arquivo e devolve uma lista
     public ArrayList<Item> lerItens() {
         ArrayList<Item> itensLidos = new ArrayList<Item>();
         try {
             BufferedReader leitura = new BufferedReader(new FileReader(caminho));
             String linhaAtual = leitura.readLine();
             while (linhaAtual != null) {
+                //Quebra a linha pelos ";"
                 String[] partesLinha = linhaAtual.split(";");
                 String tipo = partesLinha[0];
                 String nomeItem = partesLinha[1];
@@ -74,7 +75,7 @@ public class ArquivoItens {
                 String img = partesLinha[6];
                 int qtdUsos = Integer.parseInt(partesLinha[7]);
 
-                //Campos de empréstimo:
+                // =Campos de empréstimo (se existirem)
                 boolean emprestado = false;
                 String pessoa = "";
                 String dataEmp = "";
@@ -89,6 +90,7 @@ public class ArquivoItens {
                 }
 
                 Item item = null;
+                // Cria o objeto correto conforme o tipo
                 if (tipo.equals("Camisa")) {
                     item = new Camisa(nomeItem, corItem, tamItem, lojaItem, conserv, img);
                 }
@@ -115,10 +117,11 @@ public class ArquivoItens {
                 }
 
                 if (item != null) {
+                    //Marca o número de usos desse item em looks
                     for (int k = 0; k < qtdUsos; k++) {
                         item.registrarUso();
                     }
-                    // Setar info de empréstimo se for o caso
+                    //Se for emprestável, seta os dados de empréstimo
                     if (item instanceof IEmprestavel) {
                         IEmprestavel emp = (IEmprestavel) item;
                         emp.setEmprestado(emprestado);
@@ -134,7 +137,7 @@ public class ArquivoItens {
             leitura.close();
 
         } catch (Exception erro) {
-            System.out.println("Não consegui ler os itens... vê se o arquivo existe ou se está certinho.");
+            System.out.println("Erro ao ler os itens do arquivo.");
         }
         return itensLidos;
     }

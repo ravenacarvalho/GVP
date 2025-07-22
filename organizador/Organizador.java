@@ -9,18 +9,19 @@ public class Organizador {
     private ArrayList<Look> looks;
 
     public Organizador() {
-        lstItens = new ArrayList<>();
-        looks = new ArrayList<>();
+        lstItens = new ArrayList<>(); //Onde guarda todos os itens cadastrados
+        looks = new ArrayList<>(); //Onde ficam os looks montados
     }
 
     // Métodos de Item
-    public void adicionar(Item it) {
-        lstItens.add(it);
+    public void adicionar(Item it) { 
+        lstItens.add(it);  //Adiciona item novo
     }
     public void remover(Item it) {
-        lstItens.remove(it);
+        lstItens.remove(it);  //Remove item da lista
     }
     public Item procurarItem(String nome) {
+        //Procura item pelo nome na lista
         for (int i = 0; i < lstItens.size(); i++) {
             Item item = lstItens.get(i);
             if (item.getNome().equals(nome)) {
@@ -30,6 +31,7 @@ public class Organizador {
         return null;
     }
     public void trocarItem(String nome, Item novo) {
+        //Substitui o item antigo por um novo, baseado no nome (pra editar)
         for (int i = 0; i < lstItens.size(); i++) {
             if (lstItens.get(i).getNome().equals(nome)) {
                 lstItens.set(i, novo);
@@ -38,6 +40,7 @@ public class Organizador {
         }
     }
     public ArrayList<Item> pegarItens() {
+        //Devolve a lista completa dos itens
         return lstItens;
     }
 
@@ -69,6 +72,7 @@ public class Organizador {
         System.out.println("O item menos usado é: " + menosUsado.getNome() + " (" + menosUsado.getVezesUsado() + " usos)");
     }
     public void mostrarItensEmprestados() {
+        //Mostra só os itens que estão emprestados no momento
         boolean temEmp = false;
         for (int i = 0; i < lstItens.size(); i++) {
             Item it = lstItens.get(i);
@@ -88,15 +92,17 @@ public class Organizador {
 
     // Métodos de Look
     public void adicionarLook(Look look) {
-        looks.add(look);
+        looks.add(look);   //Adiciona look novo
     }
     public void removerLook(Look look) {
-        looks.remove(look);
-    }
+        looks.remove(look);   //Remove look da lista
+    } 
     public ArrayList<Look> pegarLooks() {
+        //Devolve todos os looks cadastrados
         return looks;
     }
     public Look buscarLookPorNome(String nome) {
+        //Procura look pelo nome (ignora maiúsculo/minúsculo)
         for (int i = 0; i < looks.size(); i++) {
             if (looks.get(i).getNome().equalsIgnoreCase(nome)) {
                 return looks.get(i);

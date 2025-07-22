@@ -16,7 +16,7 @@ public class TelaEmprestarItem extends JFrame {
         JPanel painel = new JPanel();
         painel.setLayout(new GridLayout(5, 2, 5, 5));
 
-        // Combo só com itens emprestáveis
+        //Combo só mostra itens que podem ser emprestados e que estão disponíveis
         painel.add(new JLabel("Selecione o item:"));
         JComboBox<Item> comboItem = new JComboBox<>();
         for (int i = 0; i < organizador.pegarItens().size(); i++) {
@@ -42,9 +42,10 @@ public class TelaEmprestarItem extends JFrame {
         JButton botaoEmprestar = new JButton("Emprestar");
         painel.add(botaoEmprestar);
 
-        // Só pra alinhar o botão na grade
+        //Só pra alinhar o botão
         painel.add(new JLabel(""));
 
+        //Quando clicar, faz o empréstimo se estiver tudo preenchido certo
         botaoEmprestar.addActionListener(e -> {
             Item selecionado = (Item) comboItem.getSelectedItem();
             String pessoa = campoPessoa.getText().trim();

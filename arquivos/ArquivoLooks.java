@@ -11,7 +11,7 @@ public class ArquivoLooks {
         this.caminho = arquivo;
     }
 
-    // Salva todos os looks com seus itens 
+    //Salva todos os looks no arquivo, um por linha
     public void salvarLooks(ArrayList<Look> listaLooks) {
         try {
             FileWriter fw = new FileWriter(caminho);
@@ -21,6 +21,7 @@ public class ArquivoLooks {
                 Look lk = listaLooks.get(k);
                 StringBuilder linha = new StringBuilder();
                 linha.append(lk.getNome());
+                //Junta o nome dos itens do look, separados por ';'
                 for (int i = 0; i < lk.pegarItens().size(); i++) { // Loop para cada item do look
                     Item it = lk.pegarItens().get(i);
                     linha.append(";").append(it.getNome());
@@ -29,11 +30,11 @@ public class ArquivoLooks {
             }
             gravador.close();
         } catch (Exception erro) {
-            System.out.println("Deu erro ao salvar os looks.");
+            System.out.println("Erro ao salvar os looks.");
         }
     }    
 
-    // Para ler looks do arquivo, precisa passar os itens já carregados
+    //Lê os looks do arquivo (precisa passar os itens já carregados pra poder montar o look)
     public List<Look> lerLooks(List<Item> listaDeItens) {
         ArrayList<Look> looksLidos = new ArrayList<Look>();
         try {
@@ -54,12 +55,12 @@ public class ArquivoLooks {
             }
             leitura.close();
         } catch (Exception exc) {
-            System.out.println("Não consegui ler os looks.");
+            System.out.println("Erro ao salvar os looks.");
         }
         return looksLidos;
     }
 
-    // Função para buscar item pelo nome numa lista
+    // Busca um item pelo nome na lista passada
     private Item buscarItemPorNome(String nome, List<Item> lista) {
         for (int i = 0; i < lista.size(); i++) {
             Item it = lista.get(i);

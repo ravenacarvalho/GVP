@@ -12,12 +12,14 @@ public class TelaListarLooks extends JFrame {
         super("Looks Cadastrados");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
+        //Puxa todos os looks cadastrados do organizador
         DefaultListModel<Look> modelo = new DefaultListModel<>();
         List<Look> looks = organizador.pegarLooks();
         for (int i = 0; i < looks.size(); i++) {
             modelo.addElement(looks.get(i));
         }
 
+        //Mostra os looks numa lista rolável
         JList<Look> listaLooks = new JList<>(modelo);
         JScrollPane scroll = new JScrollPane(listaLooks);
 

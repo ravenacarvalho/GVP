@@ -13,6 +13,7 @@ public class TelaCadastroItem extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         JPanel painel = new JPanel();
 
+        //Cada campo do formulário, um embaixo do outro
         painel.setLayout(new GridLayout(8, 2));
 
         painel.add(new JLabel("Tipo:"));
@@ -46,13 +47,14 @@ public class TelaCadastroItem extends JFrame {
 
         JButton botaoCadastrar = new JButton("Cadastrar");
         painel.add(botaoCadastrar);
-        painel.add(new JLabel("")); // Só pra completar o GridLayout
+        painel.add(new JLabel("")); //Só pra completar o GridLayout
 
         getContentPane().add(painel);
 
-        // Quando clicar no botão, pega todos os dados e cadastra o item
+        //Quando clicar, pega todos os dados e cadastra o item
         botaoCadastrar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                //Pega tudo que foi preenchido
                 String tipo = (String) comboTipo.getSelectedItem();
                 String nome = campoNome.getText();
                 String cor = campoCor.getText();
@@ -62,6 +64,8 @@ public class TelaCadastroItem extends JFrame {
                 String imagem = campoImagem.getText();
 
                 Item item = null;
+
+                //Cria a subclasse correspondente conforme a escolha do tipo
                 if (tipo.equals("Camisa")) {
                     item = new Camisa(nome, cor, tamanho, loja, conservacao, imagem);
                 }
@@ -86,7 +90,7 @@ public class TelaCadastroItem extends JFrame {
                 else if (tipo.equals("Pulseira")) {
                     item = new Pulseira(nome, cor, tamanho, loja, conservacao, imagem);
                 }
-                // Se conseguir criar, salva no organizador
+                // Se criou, adiciona no organizador e já salva no arquivo
                 if (item != null) {
                     organizador.adicionar(item);
                     arqItens.salvarItens(new ArrayList<>(organizador.pegarItens()));

@@ -14,13 +14,16 @@ public class TelaRemoverLook extends JFrame {
         JPanel painel = new JPanel();
         painel.setLayout(new FlowLayout());
 
+        //Campo pra digitar o nome do look que quer remover
         painel.add(new JLabel("Nome do look para remover:"));
         JTextField campoNome = new JTextField(15);
         painel.add(campoNome);
 
+        //Botão pra remover
         JButton botaoRemover = new JButton("Remover");
         painel.add(botaoRemover);
 
+         //Quando clicar, tenta remover o look pelo nome digitado
         botaoRemover.addActionListener(e -> {
             String nome = campoNome.getText();
             Look look = organizador.buscarLookPorNome(nome);

@@ -15,16 +15,16 @@ public class TelaDevolverItem extends JFrame {
         JPanel painel = new JPanel();
         painel.setLayout(new FlowLayout());
 
-        // Campo para digitar o nome do item
+        //Campo pra digitar o nome do item
         painel.add(new JLabel("Nome do item para devolver:"));
         JTextField campoNome = new JTextField(15);
         painel.add(campoNome);
 
-        // Botão para registrar devolução
+        //Botão pra registrar devolução
         JButton botaoDevolver = new JButton("Registrar Devolução");
         painel.add(botaoDevolver);
 
-        // Ao clicar, tenta devolver o item pelo nome
+        //Quando clicar, tenta devolver o item pelo nome
         botaoDevolver.addActionListener(e -> {
             String nome = campoNome.getText();
             Item item = organizador.procurarItem(nome);

@@ -50,7 +50,27 @@ public abstract class Item implements Serializable {
     public void registrarUso() { 
         vezesUsado++; 
     }
-    // Para mostrar nome na lista de Swing:
+
+    //Setters pra TelaEditarItem
+    public void setNome(String nome) { 
+        this.nome = nome; 
+    }
+    public void setCor(String cor) { 
+        this.cor = cor; 
+    }
+    public void setTamanho(String tamanho) { 
+        this.tamanho = tamanho; 
+    }
+    public void setLojaOrigem(String lojaOrigem) { 
+        this.lojaOrigem = lojaOrigem;
+     }
+    public void setEstadoConservacao(String estadoConservacao) { 
+        this.estadoConservacao = estadoConservacao; }
+    public void setCaminhoImagem(String caminhoImagem) {
+         this.caminhoImagem = caminhoImagem; 
+    }
+
+    //Exibe só o nome ao usar JComboBox ou JList
     @Override
     public String toString() {
         return nome;

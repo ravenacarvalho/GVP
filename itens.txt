@@ -1,10 +1,10 @@
-Camisa;Camisa da Zara;Preta;P;Zara;Excelente;Teste;2;true;Sabrina;2025-07-21
+Camisa;Camisa da Zara;Rosa;P;Zara;Excelente;Teste;3;true;Sabrina;2025-07-21
 Saia;Saia Plissada;Rosa;P;MModas;Boa;Teste;0;true;Mãe;2025-07-21
-Calcinha;Calcinha básica;Bege;P;Renner;Excelente;Teste;2;false;;
+Calcinha;Calcinha básica;Bege;P;Renner;Excelente;Teste;3;false;;
 Relogio;Relógio Technos;Preto;P;Technos;Excelente;Teste;2;false;;
 Casaco;Blazer;Azul Marinho;P;C&A;Excelente;Teste;1;false;;
 Calca;Calça Jeans Mom;Azul;P;Tommy Hilfiger;Excelente;Teste;2;false;;
-Saia;Saia Alfaiataria Midi;Cinza;P;Le Lis;Excelente;Teste;1;false;;
+Saia;Saia Alfaiataria Midi;Cinza;P;Le Lis;Excelente;Teste;2;false;;
 Saia;Saia Alfaiataria Curta;Preto;P;Zara;Excelente;Teste;0;false;;
 Camisa;Cropped ;Verde;P;Planet Girls;Bom;Teste;0;false;;
 Camisa;Camisa de Ciência da Computação;Preto;P;CAComp;Bom;Teste;1;false;;

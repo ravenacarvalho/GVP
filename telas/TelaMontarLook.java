@@ -17,7 +17,7 @@ public class TelaMontarLook extends JFrame {
         JPanel painel = new JPanel();
         painel.setLayout(new BorderLayout());
 
-        // Campo para nome do look
+        //Campo pra colocar o nome do look novo
         JPanel painelTopo = new JPanel();
         painelTopo.setLayout(new GridLayout(2, 1));
         JPanel linhaNome = new JPanel();
@@ -28,13 +28,14 @@ public class TelaMontarLook extends JFrame {
         painelTopo.add(new JLabel("Segure Ctrl para selecionar mais de um item!"));
         painel.add(painelTopo, BorderLayout.NORTH);
 
-        // Lista de itens disponíveis
+        //Lista todos os itens cadastrados pra montar o look
         DefaultListModel<Item> modelo = new DefaultListModel<>();
         for (int i = 0; i < organizador.pegarItens().size(); i++) {
             Item item = organizador.pegarItens().get(i);
             modelo.addElement(item);
         }
 
+        //Usuário pode selecionar vários itens pra montar o look
         JList<Item> listaItens = new JList<>(modelo);
         listaItens.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
@@ -45,6 +46,7 @@ public class TelaMontarLook extends JFrame {
         JButton botaoMontar = new JButton("Montar Look");
         painel.add(botaoMontar, BorderLayout.SOUTH);
 
+        //Botão pra confirmar a criação do look
         botaoMontar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String nome = campoNome.getText().trim();
@@ -56,12 +58,12 @@ public class TelaMontarLook extends JFrame {
                 java.util.List<Item> selecionados = listaItens.getSelectedValuesList();
                 for (int i = 0; i < selecionados.size(); i++) {
                     Item item = selecionados.get(i);
-                    look.montar(item);
-                    item.registrarUso();
+                    look.montar(item); //Adiciona o item no look
+                    item.registrarUso(); //Já conta que usou esse item pra estatísticas
                 }
                 organizador.adicionarLook(look);
-                arqLooks.salvarLooks(new ArrayList<>(organizador.pegarLooks())); // Salva os looks
-                arqItens.salvarItens(new ArrayList<>(organizador.pegarItens())); // Salva os itens com os usos atualizados
+                arqLooks.salvarLooks(new ArrayList<>(organizador.pegarLooks())); //Salva o look novo
+                arqItens.salvarItens(new ArrayList<>(organizador.pegarItens())); //Salva os itens também (pra registrar uso)
                 JOptionPane.showMessageDialog(null, "Look criado!");
                 dispose();
             }
