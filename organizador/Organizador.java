@@ -30,15 +30,6 @@ public class Organizador {
         }
         return null;
     }
-    public void trocarItem(String nome, Item novo) {
-        //Substitui o item antigo por um novo, baseado no nome (pra editar)
-        for (int i = 0; i < lstItens.size(); i++) {
-            if (lstItens.get(i).getNome().equals(nome)) {
-                lstItens.set(i, novo);
-                break;
-            }
-        }
-    }
     public ArrayList<Item> pegarItens() {
         //Devolve a lista completa dos itens
         return lstItens;
