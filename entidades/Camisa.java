@@ -14,6 +14,7 @@ public class Camisa extends Item implements IEmprestavel, ILavavel {
         super(nomeCamisa, corCamisa, tam, loja, conservacao, img, "Camisa");
     }
 
+    //Métodos IEmprestável
     @Override
     public boolean isEmprestado() {
         return emprestado;
@@ -26,6 +27,17 @@ public class Camisa extends Item implements IEmprestavel, ILavavel {
             dataEmprestimo = data;
         }
     }
+
+    public void setEmprestado(boolean emprestado) {
+        this.emprestado = emprestado;
+    }
+    public void setPessoaEmprestimo(String pessoa) {
+        this.pessoaEmprestimo = pessoa;
+    }
+    public void setDataEmprestimo(LocalDate data) {
+        this.dataEmprestimo = data;
+    }
+
     @Override
     public int quantidadeDiasEmprestado() {
         if (!emprestado || dataEmprestimo == null) {
@@ -54,12 +66,25 @@ public class Camisa extends Item implements IEmprestavel, ILavavel {
 
         return totalDias;
     }
+
+    @Override
+    public String getNomePessoaEmprestimo() {
+        return pessoaEmprestimo;
+    }
+
+    @Override
+    public LocalDate getDataEmprestimo() {
+        return dataEmprestimo;
+    }
+
     @Override
     public void registrarDevolucao() {
         emprestado = false;
         pessoaEmprestimo = "";
         dataEmprestimo = null;
     }
+    
+    //Métodos ILavável
     @Override
     public void registrarLavagem(LocalDate data) {
         ultimaLavagem = data;
@@ -68,4 +93,5 @@ public class Camisa extends Item implements IEmprestavel, ILavavel {
     public LocalDate getUltimaLavagem() {
         return ultimaLavagem;
     }
+
 }

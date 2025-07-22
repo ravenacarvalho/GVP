@@ -9,6 +9,8 @@ public class Cueca extends Item implements ILavavel {
     public Cueca(String nomeCueca, String corCueca, String tam, String loja, String conservacao, String img) {
         super(nomeCueca, corCueca, tam, loja, conservacao, img, "Cueca");
     }
+
+    //Métodos ILavavel
     @Override
     public void registrarLavagem(LocalDate data) {
         ultimaLavagem = data;

@@ -14,10 +14,12 @@ public class Calca extends Item implements IEmprestavel, ILavavel {
         super(nomeCalca, corCalca, tam, loja, conservacao, img, "Calca");
     }
 
+    //Métodos IEmprestável
     @Override
     public boolean isEmprestado() {
         return emprestado;
     }
+
     @Override
     public void registrarEmprestimo(String pessoa, LocalDate data) {
         if (!emprestado) {
@@ -26,6 +28,22 @@ public class Calca extends Item implements IEmprestavel, ILavavel {
             dataEmprestimo = data;
         }
     }
+
+    @Override
+    public void setEmprestado(boolean valor) {
+        this.emprestado = valor;
+    }
+
+    @Override
+    public void setPessoaEmprestimo(String pessoa) {
+        this.pessoaEmprestimo = pessoa;
+    }
+
+    @Override
+    public void setDataEmprestimo(LocalDate data) {
+        this.dataEmprestimo = data;
+    }
+
     @Override
     public int quantidadeDiasEmprestado() {
         if (!emprestado || dataEmprestimo == null) {
@@ -42,7 +60,6 @@ public class Calca extends Item implements IEmprestavel, ILavavel {
         int diaHoje = hoje.getDayOfMonth();
 
         int totalDias = 0;
-
         // Cálculo bem manual (não considera bissexto)
         totalDias += (anoHoje - anoEmp) * 365;
         totalDias += (mesHoje - mesEmp) * 30; // Média escolhida pra facilitar o cálculo
@@ -51,19 +68,32 @@ public class Calca extends Item implements IEmprestavel, ILavavel {
         if (totalDias < 0) {
             totalDias = 0;
         }
-
         return totalDias;
     }
+
+    @Override
+    public String getNomePessoaEmprestimo() {
+        return pessoaEmprestimo;
+    }
+
+    @Override
+    public LocalDate getDataEmprestimo() {
+        return dataEmprestimo;
+    }
+
     @Override
     public void registrarDevolucao() {
         emprestado = false;
         pessoaEmprestimo = "";
         dataEmprestimo = null;
     }
+
+    //Métodos ILavável
     @Override
     public void registrarLavagem(LocalDate data) {
         ultimaLavagem = data;
     }
+
     @Override
     public LocalDate getUltimaLavagem() {
         return ultimaLavagem;

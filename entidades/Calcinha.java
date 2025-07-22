@@ -10,6 +10,7 @@ public class Calcinha extends Item implements ILavavel {
         super(nomeCalcinha, corCalcinha, tam, loja, conservacao, img, "Calcinha");
     }
 
+    //Métodos ILavavel
     @Override
     public void registrarLavagem(LocalDate data) {
         ultimaLavagem = data;

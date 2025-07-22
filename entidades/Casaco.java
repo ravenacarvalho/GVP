@@ -14,6 +14,7 @@ public class Casaco extends Item implements IEmprestavel, ILavavel {
         super(nomeCasaco, corCasaco, tam, loja, conservacao, img, "Casaco");
     }
 
+    //Métodos IEmprestavel
     @Override
     public boolean isEmprestado() {
         return emprestado;
@@ -26,6 +27,22 @@ public class Casaco extends Item implements IEmprestavel, ILavavel {
             dataEmprestimo = data;
         }
     }
+
+    @Override
+    public void setEmprestado(boolean emprestado) {
+        this.emprestado = emprestado;
+    }
+
+    @Override
+    public void setPessoaEmprestimo(String pessoa) {
+        this.pessoaEmprestimo = pessoa;
+    }
+
+    @Override
+    public void setDataEmprestimo(LocalDate data) {
+        this.dataEmprestimo = data;
+    }
+
     @Override
     public int quantidadeDiasEmprestado() {
         if (!emprestado || dataEmprestimo == null) {
@@ -54,12 +71,25 @@ public class Casaco extends Item implements IEmprestavel, ILavavel {
 
         return totalDias;
     }
+
+    @Override
+    public String getNomePessoaEmprestimo() {
+        return pessoaEmprestimo;
+    }
+
+    @Override
+    public LocalDate getDataEmprestimo() {
+        return dataEmprestimo;
+    }
+
     @Override
     public void registrarDevolucao() {
         emprestado = false;
         pessoaEmprestimo = "";
         dataEmprestimo = null;
     }
+
+    //Métodos ILavavel
     @Override
     public void registrarLavagem(LocalDate data) {
         ultimaLavagem = data;

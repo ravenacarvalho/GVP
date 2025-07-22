@@ -14,7 +14,7 @@ public class Main {
         ArquivoItens arqItens = new ArquivoItens("itens.txt");
         ArquivoLooks arqLooks = new ArquivoLooks("looks.txt"); 
 
-        //Carrega os itens do arquivo, se houver
+        //Carrega os itens do arquivo
         ArrayList<Item> itensLidos = arqItens.lerItens();
         for (int i = 0; i < itensLidos.size(); i++) {
             organizador.adicionar(itensLidos.get(i));

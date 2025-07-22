@@ -25,7 +25,7 @@ public class TelaRemoverItem extends JFrame {
         JButton botaoRemover = new JButton("Tentar Remover");
         painel.add(botaoRemover);
 
-        // Ação: remove o item e salva a lista atualizada
+        // Remove o item e salva a lista atualizada
         botaoRemover.addActionListener(e -> {
             String nome = campoNome.getText();
             Item item = organizador.procurarItem(nome);

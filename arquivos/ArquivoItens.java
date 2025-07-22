@@ -3,6 +3,7 @@ package arquivos;
 import entidades.*;
 import java.util.*;
 import java.io.*;
+import interfaces.IEmprestavel;
 
 public class ArquivoItens {
     private String caminho;
@@ -19,41 +20,35 @@ public class ArquivoItens {
 
             for (int pos = 0; pos < listaItens.size(); pos++) {
                 Item it = listaItens.get(pos);
-                String tipo = "";
-                if (it instanceof Camisa) {
-                    tipo = "Camisa";
-                } 
-                else if (it instanceof Calca) {
-                    tipo = "Calca";
-                }
-                else if (it instanceof Saia) {
-                    tipo = "Saia";
-                }
-                else if (it instanceof Casaco) {
-                    tipo = "Casaco";
-                }
-                else if (it instanceof Calcinha) {
-                    tipo = "Calcinha";
-                }
-                else if (it instanceof Cueca) {
-                    tipo = "Cueca";
-                }
-                else if (it instanceof Relogio) {
-                    tipo = "Relogio";
-                }
-                else if (it instanceof Pulseira) {
-                    tipo = "Pulseira";
-                }
+                String tipo = it.getTipo();
 
-                gravador.println(tipo + ";" +
+                // Campos básicos
+                String linha = tipo + ";" +
                     it.getNome() + ";" +
                     it.getCor() + ";" +
                     it.getTamanho() + ";" +
                     it.getLojaOrigem() + ";" +
                     it.getEstadoConservacao() + ";" +
                     it.getCaminhoImagem() + ";" +
-                    it.getVezesUsado()
-                );
+                    it.getVezesUsado();
+
+                // Se o item é emprestável, salva informações do empréstimo
+                if (it instanceof IEmprestavel) {
+                    IEmprestavel emp = (IEmprestavel) it;
+                    linha += ";" + emp.isEmprestado(); // true/false
+                    String nomePessoa = emp.getNomePessoaEmprestimo();
+                    linha += ";" + (nomePessoa == null ? "" : nomePessoa);
+                    String data = "";
+                    if (emp.getDataEmprestimo() != null) {
+                        data = emp.getDataEmprestimo().toString(); // yyyy-MM-dd
+                    }
+                    linha += ";" + data;
+                } else {
+                    // Se não é emprestável, deixa os campos vazios
+                    linha += ";false;;";
+                }
+
+                gravador.println(linha);
             }
             gravador.close();
 
@@ -78,6 +73,20 @@ public class ArquivoItens {
                 String conserv = partesLinha[5];
                 String img = partesLinha[6];
                 int qtdUsos = Integer.parseInt(partesLinha[7]);
+
+                //Campos de empréstimo:
+                boolean emprestado = false;
+                String pessoa = "";
+                String dataEmp = "";
+                if (partesLinha.length > 8) {
+                    emprestado = Boolean.parseBoolean(partesLinha[8]);
+                }
+                if (partesLinha.length > 9) {
+                    pessoa = partesLinha[9];
+                }
+                if (partesLinha.length > 10) {
+                    dataEmp = partesLinha[10];
+                }
 
                 Item item = null;
                 if (tipo.equals("Camisa")) {
@@ -108,6 +117,15 @@ public class ArquivoItens {
                 if (item != null) {
                     for (int k = 0; k < qtdUsos; k++) {
                         item.registrarUso();
+                    }
+                    // Setar info de empréstimo se for o caso
+                    if (item instanceof IEmprestavel) {
+                        IEmprestavel emp = (IEmprestavel) item;
+                        emp.setEmprestado(emprestado);
+                        emp.setPessoaEmprestimo(pessoa);
+                        if (!dataEmp.isEmpty()) {
+                            emp.setDataEmprestimo(java.time.LocalDate.parse(dataEmp));
+                        }
                     }
                     itensLidos.add(item);
                 }
