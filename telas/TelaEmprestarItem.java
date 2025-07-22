@@ -23,7 +23,7 @@ public class TelaEmprestarItem extends JFrame {
             Item item = organizador.pegarItens().get(i);
             if (item instanceof interfaces.IEmprestavel) {
                 interfaces.IEmprestavel emp = (interfaces.IEmprestavel) item;
-                if (!emp.isEmprestado()) { // Só mostra se não estiver emprestado
+                if (!emp.estaEmprestado()) { // Só mostra se não estiver emprestado
                     comboItem.addItem(item);
                 }
             }

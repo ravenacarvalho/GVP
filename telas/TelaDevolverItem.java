@@ -31,7 +31,7 @@ public class TelaDevolverItem extends JFrame {
 
             if (item instanceof IEmprestavel) {
                 IEmprestavel emp = (IEmprestavel) item;
-                if (emp.isEmprestado()) {
+                if (emp.estaEmprestado()) {
                     emp.registrarDevolucao();
                     // Salva o novo estado dos itens
                     arqItens.salvarItens(new java.util.ArrayList<>(organizador.pegarItens()));

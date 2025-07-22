@@ -1,4 +1,4 @@
-Look Casual;Camisa da Zara;Saia Plissada;Calcinha básica
-Look trabalho (1);Camisa da Zara;Calcinha básica;Relógio Technos;Blazer;Calça Jeans Mom
-Look trabalho (2);Camisa da Zara;Relógio Technos;Blazer;Saia Alfaiataria Midi
-Teste;Camisa da Zara;Saia Plissada;Calcinha básica;Blazer
+Look Casual;Camisa da Zara;Saia Plissada;Calcinha básica;
+Look trabalho (1);Camisa da Zara;Calcinha básica;Relógio Technos;Blazer;Calça Jeans Mom;
+Look trabalho (2);Camisa da Zara;Calcinha básica;Relógio Technos;Blazer;Saia Alfaiataria Midi;
+Look faculdade;Calcinha básica;Calça Jeans Mom;Camisa de Ciência da Computação;22-07-2025 - Faculdade

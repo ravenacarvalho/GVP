@@ -14,7 +14,7 @@ public class Relogio extends Item implements IEmprestavel {
 
     // Métodos IEmprestavel
     @Override
-    public boolean isEmprestado() {
+    public boolean estaEmprestado() {
         return emprestado;
     }
 

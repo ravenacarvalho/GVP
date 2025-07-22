@@ -16,7 +16,7 @@ public class Camisa extends Item implements IEmprestavel, ILavavel {
 
     //Métodos IEmprestável
     @Override
-    public boolean isEmprestado() {
+    public boolean estaEmprestado() {
         return emprestado;
     }
     @Override

@@ -35,7 +35,7 @@ public class ArquivoItens {
                 //Se o item é emprestável, adiciona os campos de empréstimo
                 if (it instanceof IEmprestavel) {
                     IEmprestavel emp = (IEmprestavel) it;
-                    linha += ";" + emp.isEmprestado(); //true/false
+                    linha += ";" + emp.estaEmprestado(); //true/false
                     String nomePessoa = emp.getNomePessoaEmprestimo();
                     linha += ";" + (nomePessoa == null ? "" : nomePessoa);
                     String data = "";

@@ -16,7 +16,7 @@ public class Saia extends Item implements IEmprestavel, ILavavel {
 
     // Métodos IEmprestavel
     @Override
-    public boolean isEmprestado() {
+    public boolean estaEmprestado() {
         return emprestado;
     }
 

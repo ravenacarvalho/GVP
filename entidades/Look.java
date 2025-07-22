@@ -58,6 +58,10 @@ public class Look implements Serializable {
         usosLook.add(descricao);
     }
 
+    public List<String> getUsos() {
+        return usosLook;
+    }
+
     public String getNome() {
         return nomeLook;
     }

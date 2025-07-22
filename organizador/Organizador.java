@@ -79,7 +79,7 @@ public class Organizador {
 
             if (it instanceof interfaces.IEmprestavel) {
                 interfaces.IEmprestavel emp = (interfaces.IEmprestavel) it;
-                if (emp.isEmprestado()) {
+                if (emp.estaEmprestado()) {
                     System.out.println(it.getNome() + " está emprestado agora.");
                     temEmp = true;
                 }

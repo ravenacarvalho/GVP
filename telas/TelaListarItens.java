@@ -37,7 +37,7 @@ public class TelaListarItens extends JFrame {
             // Exibe dias desde o empréstimo se o item for emprestável e está emprestado
             if (item instanceof interfaces.IEmprestavel) {
                 interfaces.IEmprestavel emp = (interfaces.IEmprestavel) item;
-                if (emp.isEmprestado()) {
+                if (emp.estaEmprestado()) {
                     long dias = emp.quantidadeDiasEmprestado();
                     texto.append(" (Emprestado há ").append(dias).append(" dias)");
                 }

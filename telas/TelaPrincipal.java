@@ -7,56 +7,80 @@ import arquivos.ArquivoItens;
 import arquivos.ArquivoLooks;
 
 public class TelaPrincipal extends JFrame {
-    public TelaPrincipal(Organizador organizador, arquivos.ArquivoItens arqItens, arquivos.ArquivoLooks arqLooks) {
+    public TelaPrincipal(Organizador organizador, ArquivoItens arqItens, ArquivoLooks arqLooks) {
         super("Gestor de Vestuário Pessoal");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        JPanel painel = new JPanel();
+        JPanel painelPrincipal = new JPanel(new BorderLayout());
 
-        //GridLayout pra ficar tudo alinhado, um botão embaixo do outro
-        painel.setLayout(new GridLayout(11, 1, 10, 10));
+        //Painel dos botões principais
+        JPanel colItens = new JPanel(new GridLayout(6, 1, 10, 10));
+        JPanel colLooks = new JPanel(new GridLayout(6, 1, 10, 10));
+        JPanel painelBotoes = new JPanel(new GridLayout(1, 2, 30, 0));
 
-        //Tipos de botões
-        JButton botaoCad = new JButton("Cadastrar Item"); //Pra cadastrar item novo
-        JButton botaoEditar = new JButton("Editar Item"); //Pra editar item
-        JButton botaoListar = new JButton("Listar Itens"); //Pra listar todos os itens cadastrados
-        JButton botaoDel = new JButton("Remover Item"); //Pra apagar algum item
-        JButton botaoEmprestar = new JButton("Emprestar Item"); //Pra emprestar algum item
-        JButton botaoDevolver = new JButton("Devolver Item"); //Pra devolver algum item
-        JButton botaoMontarLook = new JButton("Montar Look"); //Pra montar looks
-        JButton botaoEditarLook = new JButton("Editar Look"); //Pra editar looks
-        JButton botaoListarLooks = new JButton("Listar Looks"); //Pra listar todos os looks criados
-        JButton botaoRemoverLook = new JButton("Remover Look"); //Pra remover algum look
-        JButton botaoFechar = new JButton("Sair"); //Fecha o programa
-
-        //Adiciona os botões no painel
-        painel.add(botaoCad);
-        painel.add(botaoEditar);
-        painel.add(botaoListar);
-        painel.add(botaoDel);
-        painel.add(botaoEmprestar);
-        painel.add(botaoDevolver);
-        painel.add(botaoMontarLook);
-        painel.add(botaoEditarLook);
-        painel.add(botaoListarLooks);
-        painel.add(botaoRemoverLook);
-        painel.add(botaoFechar);
-
-        getContentPane().add(painel);
-
-        //Quando clica no botão, abre a tela correspondente
+        //Adicionando os botões de itens
+        JButton botaoCad = new JButton("Cadastrar Item");
+        colItens.add(botaoCad);
         botaoCad.addActionListener(e -> new TelaCadastroItem(organizador, arqItens));
+
+        JButton botaoEditar = new JButton("Editar Item");
+        colItens.add(botaoEditar);
         botaoEditar.addActionListener(e -> new TelaEditarItem(organizador, arqItens));
-        botaoListar.addActionListener(e -> new TelaListarItens(organizador));
+
+        JButton botaoDel = new JButton("Remover Item");
+        colItens.add(botaoDel);
         botaoDel.addActionListener(e -> new TelaRemoverItem(organizador, arqItens));
+
+        JButton botaoEmprestar = new JButton("Emprestar Item");
+        colItens.add(botaoEmprestar);
         botaoEmprestar.addActionListener(e -> new TelaEmprestarItem(organizador, arqItens));
+
+        JButton botaoDevolver = new JButton("Devolver Item");
+        colItens.add(botaoDevolver);
         botaoDevolver.addActionListener(e -> new TelaDevolverItem(organizador, arqItens));
+
+        JButton botaoListar = new JButton("Listar Itens");
+        colItens.add(botaoListar);
+        botaoListar.addActionListener(e -> new TelaListarItens(organizador));
+
+        //Botões dos looks
+        JButton botaoMontarLook = new JButton("Montar Look");
+        colLooks.add(botaoMontarLook);
         botaoMontarLook.addActionListener(e -> new TelaMontarLook(organizador, arqLooks, arqItens));
+
+        JButton botaoEditarLook = new JButton("Editar Look");
+        colLooks.add(botaoEditarLook);
         botaoEditarLook.addActionListener(e -> new TelaEditarLook(organizador, arqLooks));
-        botaoListarLooks.addActionListener(e -> new TelaListarLooks(organizador, arqLooks));
+
+        JButton botaoRemoverLook = new JButton("Remover Look");
+        colLooks.add(botaoRemoverLook);
         botaoRemoverLook.addActionListener(e -> new TelaRemoverLook(organizador, arqLooks));
 
-        botaoFechar.addActionListener(e -> System.exit(0)); //Fecha o programa
+        JButton botaoRegistrarUsoLook = new JButton("Registrar Uso Look");
+        colLooks.add(botaoRegistrarUsoLook);
+        botaoRegistrarUsoLook.addActionListener(e -> new TelaRegistrarUsoLook(organizador, arqLooks));
+
+        JButton botaoVerUsoLook = new JButton("Ver Uso Look");
+        colLooks.add(botaoVerUsoLook);
+        botaoVerUsoLook.addActionListener(e -> new TelaVerUsoLook(organizador));
+
+        JButton botaoListarLooks = new JButton("Listar Looks");
+        colLooks.add(botaoListarLooks);
+        botaoListarLooks.addActionListener(e -> new TelaListarLooks(organizador, arqLooks));
+
+        //Junta os dois lados no painelBotoes
+        painelBotoes.add(colItens);
+        painelBotoes.add(colLooks);
+        painelPrincipal.add(painelBotoes, BorderLayout.CENTER);
+
+        //Botão pra sair do sistema fica embaixo sozinho
+        JButton botaoFechar = new JButton("Sair");
+        JPanel painelSair = new JPanel();
+        painelSair.add(botaoFechar);
+        painelPrincipal.add(painelSair, BorderLayout.SOUTH);
+        botaoFechar.addActionListener(e -> System.exit(0));
+
+        getContentPane().add(painelPrincipal);
 
         setSize(600, 600);
         setLocationRelativeTo(null);
