@@ -36,7 +36,6 @@ public class Saia extends Item implements IEmprestavel, ILavavel {
         dataEmprestimo = null;
     }
 
-    //Setters para persistência
     @Override
     public void setEmprestado(boolean emprestado) {
         this.emprestado = emprestado;
@@ -52,7 +51,6 @@ public class Saia extends Item implements IEmprestavel, ILavavel {
         this.dataEmprestimo = data;
     }
 
-    //Getters de informações
     @Override
     public String getNomePessoaEmprestimo() {
         return pessoaEmprestimo;
