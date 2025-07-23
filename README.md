@@ -8,4 +8,4 @@ javac -encoding UTF-8 */*.java
 Em seguida, execute:
 java app.Main
 
-Agora, é só aproveitar as funcionalidades :)
+Espero que você goste :)
