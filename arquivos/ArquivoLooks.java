@@ -26,7 +26,7 @@ public class ArquivoLooks {
                 for (int i = 0; i < itens.size(); i++) { // Loop para cada item do look
                     linha.append(";").append(itens.get(i).getNome());
                 }
-                // Adiciona usos registrados, separados por '|', tudo ao final da linha
+                //Adiciona usos registrados, separados por '|', tudo ao final da linha
                 linha.append(";");
                 ArrayList<String> usos = new ArrayList<>(lk.getUsos());
                 if (usos != null && !usos.isEmpty()) {
@@ -43,7 +43,7 @@ public class ArquivoLooks {
         }
     }    
 
-    //Lê os looks do arquivo (precisa passar os itens já carregados pra poder montar o look)
+    //Lê os looks salvos, precisa dos itens carregados para reconstruir cada look
     public List<Look> lerLooks(List<Item> listaDeItens) {
         ArrayList<Look> looksLidos = new ArrayList<Look>();
         try {
@@ -52,7 +52,7 @@ public class ArquivoLooks {
             while (linhaAtual != null) {
                 String[] partes = linhaAtual.split(";");
                 Look novoLook = new Look(partes[0]);
-                // Adiciona os itens (menos o primeiro, que é nome, e o último, que são usos)
+                //Adiciona os itens (menos o primeiro, que é nome, e o último, que são usos)
                 for (int i = 1; i < partes.length - 1; i++) {
                     String nomeItem = partes[i];
                     Item achado = buscarItemPorNome(nomeItem, listaDeItens);
@@ -60,7 +60,7 @@ public class ArquivoLooks {
                         novoLook.montar(achado);
                     }
                 }
-                // Só adiciona uso se não vazio E tiver " - " (ex: "10-07-2025 - Festa")
+                //Só adiciona uso se não vazio e tiver " - " (ex: "10-07-2025 - Festa")
                 String usosStr = partes[partes.length - 1];
                 if (!usosStr.isEmpty() && usosStr.contains(" - ")) {
                     String[] usos = usosStr.split("\\|");
@@ -78,7 +78,7 @@ public class ArquivoLooks {
         return looksLidos;
     }
     
-    // Busca um item pelo nome na lista passada
+    //Busca um item pelo nome na lista passada
     private Item buscarItemPorNome(String nome, List<Item> lista) {
         for (int i = 0; i < lista.size(); i++) {
             Item it = lista.get(i);
