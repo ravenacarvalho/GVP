@@ -52,7 +52,7 @@ public class ArquivoLooks {
             while (linhaAtual != null) {
                 String[] partes = linhaAtual.split(";");
                 Look novoLook = new Look(partes[0]);
-                //Adiciona os itens (menos o primeiro, que é nome, e o último, que são usos)
+                // Adiciona os itens (menos o primeiro, que é nome, e o último, que são usos)
                 for (int i = 1; i < partes.length - 1; i++) {
                     String nomeItem = partes[i];
                     Item achado = buscarItemPorNome(nomeItem, listaDeItens);
@@ -60,13 +60,14 @@ public class ArquivoLooks {
                         novoLook.montar(achado);
                     }
                 }
-                //Só adiciona uso se não vazio e tiver " - " (ex: "10-07-2025 - Festa")
+                // Só adiciona uso se não vazio E tiver " - " (ex: "10-07-2025 - Festa")
                 String usosStr = partes[partes.length - 1];
                 if (!usosStr.isEmpty() && usosStr.contains(" - ")) {
                     String[] usos = usosStr.split("\\|");
                     for (int j = 0; j < usos.length; j++) {
                         novoLook.registrarUso(usos[j]);
-                    }     
+                    }
+                }
                 looksLidos.add(novoLook);
                 linhaAtual = leitura.readLine();
             }
