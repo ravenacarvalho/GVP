@@ -59,7 +59,6 @@ public class TelaMontarLook extends JFrame {
                 for (int i = 0; i < selecionados.size(); i++) {
                     Item item = selecionados.get(i);
                     look.montar(item); //Adiciona o item no look
-                    item.registrarUso(); //Já conta que usou esse item pra estatísticas
                 }
                 organizador.adicionarLook(look);
                 arqLooks.salvarLooks(new ArrayList<>(organizador.pegarLooks())); //Salva o look novo
