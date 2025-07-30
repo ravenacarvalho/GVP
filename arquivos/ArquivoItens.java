@@ -53,7 +53,7 @@ public class ArquivoItens {
             gravador.close();
 
         } catch (Exception erro) {
-            System.out.println("Deu erro ao salvar os itens... Tenta de novo aí.");
+            System.out.println("Deu erro ao salvar os itens");
         }
     }
 
