@@ -55,8 +55,11 @@ public class Look implements Serializable {
 
     //Registrar uso do look e manter histórico
     public void registrarUso(String descricao) {
-        usosLook.add(descricao);
+    usosLook.add(descricao);
+    for (int i = 0; i < itensDoLook.size(); i++) {
+        itensDoLook.get(i).registrarUso();
     }
+}
 
     public List<String> getUsos() {
         return usosLook;
